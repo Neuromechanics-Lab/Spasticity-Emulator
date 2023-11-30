@@ -1,0 +1,647 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>demo_script</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-11-28"><meta name="DC.source" content="demo_script.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1></h1><!--introduction--><p><b>Sample Trial Processing</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Column Numbers</a></li><li><a href="#2">Data Loading</a></li><li><a href="#8">Parameter definitions</a></li><li><a href="#16">Calculate orthogonal force at hand</a></li><li><a href="#18">PLOTS</a></li></ul></div><h2 id="1">Column Numbers</h2><p>Set the column numbers of relevant variables so that the appropriate vectors can be extracted from the data file</p><pre class="codeinput">Frame = 10; <span class="comment">%We use the frame number to track time. 1000 frames are recorded per second</span>
+<span class="comment">%Force Sensors</span>
+FS_X = 20; FS_Y = 21;
+
+<span class="comment">%ACH = Analog Channel. These are added in the build file and are not</span>
+<span class="comment">%default kinarm outputs</span>
+len_ACH = 49; <span class="comment">% muscle length</span>
+vel_ach = 50; <span class="comment">%velocity</span>
+activation = 51; <span class="comment">%activation</span>
+torque_analog = 52;
+SRS_gain = 53;
+
+<span class="comment">%Coordinates of hand/spring end, velocity of the handle</span>
+Hand_PositionX = 54; Hand_PositionY = 55; speed = 56; vel_x = 57; vel_y = 58;
+
+acc = 59; acc_X = 60; acc_Y = 61; Cmd_X = 62; Cmd_Y = 63; Cmd = 64;
+</pre><h2 id="2">Data Loading</h2><p><tt>Load the Hill Model Data, and Interpolate the curves to create continuous functions for smooth lookup</tt></p><pre class="codeinput">load(<span class="string">"force_curves.mat"</span>);
+</pre><pre>Force Velocity Curve</pre><pre class="codeinput">f = fvCurve(:,2);
+v = fvCurve(:,1);
+
+fv_int = spline(v, f);
+
+figure(1)
+scatter(v,f)
+xlabel(<span class="string">"Velocity"</span>)
+ylabel(<span class="string">"Force"</span>)
+hold <span class="string">on</span>
+xx = -1:0.05:1;
+plot(xx, ppval(xx,fv_int));
+</pre><img vspace="5" hspace="5" src="demo_script_01.png" alt=""> <p><tt>Force Length Active and Passive</tt></p><pre class="codeinput">fa = flaCurve(:,2);
+la = flaCurve(:,1);
+fa_int = spline(la, fa);
+
+fp = flpCurve(:,2);
+lp = flpCurve(:,1);
+fp_norm = fp ./max(fp); <span class="comment">%normalize y values</span>
+
+fp_int = spline(lp, fp);
+
+f_tot = ppval(fp_int, lp) + ppval(fa_int, lp);
+ft_int = spline(lp, f_tot);
+
+figure(2)
+scatter(la, fa)
+xlabel(<span class="string">"Length"</span>)
+ylabel(<span class="string">"Force"</span>)
+hold <span class="string">on</span>
+scatter(lp, fp)
+
+xlim([0, 2.0])
+</pre><img vspace="5" hspace="5" src="demo_script_02.png" alt=""> <pre class="codeinput">xx = 0:0.05:2.0;
+plot(xx, ppval(xx, fp_int))
+hold <span class="string">on</span>
+plot(xx, ppval(xx, fa_int))
+hold <span class="string">off</span>
+legend([<span class="string">"Active"</span>, <span class="string">"Passive"</span>])
+</pre><img vspace="5" hspace="5" src="demo_script_03.png" alt=""> <p>Load the trial we want to examine</p><pre class="codeinput">trial = readmatrix(<span class="string">"Torque Trials/SRS_9.csv"</span>, <span class="string">'Range'</span>, 273);
+</pre><h2 id="8">Parameter definitions</h2><p>These can be extracted from the file, but here I have just hard coded the values</p><pre class="codeinput"><span class="comment">% *Define the relevant coordinates and lengths of the simulation*</span>
+<span class="comment">%</span>
+<span class="comment">% &lt;&lt;display_snap.png&gt;&gt;</span>
+<span class="comment">%</span>
+
+origin = [0,0.52]; <span class="comment">% global y coordinate of the shoulder of the limb</span>
+
+d = 0.08; <span class="comment">%insertion point of muscle in forearm, measured as proportion of forearm total length</span>
+
+L1 = 0.29; L2 = 0.2; <span class="comment">%L1 = length of upper arm % L2 = length of forearm (rotating shank)</span>
+
+elbow_pos= [0, (origin(2) - L1)]; <span class="comment">%position of joint based on limb definitions</span>
+
+L1_vec = origin - elbow_pos; <span class="comment">%vector of upper arm</span>
+
+muscle_act = trial(:,activation); <span class="comment">%activation level of the muscle</span>
+
+hand_pos = [trial(:,Hand_PositionX) trial(:,Hand_PositionY)]; <span class="comment">%position of the hand in 2D space</span>
+
+hand_force = [trial(:, Cmd_X) trial(:, Cmd_Y)]; <span class="comment">%force commanded by KinArm at the hand</span>
+
+hand_FS = [trial(:,FS_X), trial(:,FS_Y)]; <span class="comment">% force measured by force sensors at the hand</span>
+L2_vec = hand_pos - elbow_pos; <span class="comment">%vector from joint to hand</span>
+
+insertion_offset = (d/L2) * L2_vec; <span class="comment">% length of insertion point along forearm</span>
+
+insertion_vec = insertion_offset - elbow_pos; <span class="comment">%vector from elbow to insertion point</span>
+insertion_pos = elbow_pos + insertion_offset; <span class="comment">%coordinate position of muscle insertion</span>
+
+muscle_vec = origin - insertion_pos; <span class="comment">% vector of muscle from origin to insertion point</span>
+
+muscle_len = zeros(length(insertion_vec), 1); <span class="comment">%length of the muscle</span>
+
+theta = zeros(length(insertion_vec), 1); <span class="comment">% empty n*1 vector for later</span>
+beta = zeros(length(insertion_vec), 1);
+
+thetatorqued = zeros(length(insertion_vec),1);
+costheta = zeros(length(insertion_vec),1);
+thetatorque = zeros(length(insertion_vec), 1);
+
+joint_ang = zeros(length(insertion_vec), 1);
+orth_ang = zeros(length(insertion_vec), 1);
+
+x1 = 1; y1 = 0; <span class="comment">%vector defining the x axis</span>
+</pre><pre class="codeinput"><span class="keyword">for</span> i = 1:length(insertion_vec)
+</pre><pre class="codeinput">    theta(i) = subspace(L2_vec(i,:)', insertion_vec(i,:)'); <span class="comment">%angle b/w forearm and muscle</span>
+    muscle_len(i) = sqrt(sum(muscle_vec(i,:).^2)); <span class="comment">%instantaneous muscle length</span>
+    beta(i) = subspace(L2_vec(i,:)', hand_force(i,:)'); <span class="comment">%angle b/w force at the hand and the forearm</span>
+    <span class="comment">%this angle helps us do inverse kinematics to calculate the torque at the hand!</span>
+
+    x2 = L2_vec(i,1);
+    y2 = L2_vec(i,2);
+    joint_ang(i) = atan2(x1*y2 - y1*x2, x1*x2 + y1*y2);
+    orth_ang(i) = joint_ang(i) - (pi/2);
+</pre><p>Calculate the norm of the cross product between the muscle and the forearm vectors, and the dot product between the muscle and forearm and take the arctangent</p><pre class="codeinput">    u = [muscle_vec(i,:), 0];
+    v1 = [L2_vec(i,:), 0];
+
+    thetatorqued(i) = atan2d(norm(cross(u,v1)), dot(u,v1));
+
+    costheta(i) = max(min(dot(u,v1)/norm(u)*norm(v1),1),-1);
+    thetatorque(i) = real(acos(costheta(i)));
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><p>Using the Forces at the hand and the angles between the joints and the muscle, calculate the torque produced by the muscle</p><pre class="codeinput">orth_v = [cos(orth_ang) sin(orth_ang)];
+
+joint_angd = rad2deg(joint_ang);
+orth_angd = rad2deg(orth_ang);
+thetad = rad2deg(theta);
+betad = rad2deg(beta);
+
+velocity = [trial(:, vel_x), trial(:, vel_y)]; <span class="comment">%x and y velocities</span>
+
+hand_speed = trial(:,speed);
+
+Fs = 1000; <span class="comment">% Frame rate is 1000 frames per second</span>
+speed_raw = [0;diff(muscle_len)*Fs];
+N3 = 2; <span class="comment">%Order</span>
+lb = 10/(0.5*Fs); <span class="comment">% Lower cutoff frquency</span>
+[b2,a2] = butter(N3,lb,<span class="string">'low'</span>);
+
+speed_filt = filtfilt(b2, a2, speed_raw); <span class="comment">%filter the speed data</span>
+
+vel_norm = speed_filt / l0; <span class="comment">%resting lengths per second</span>
+
+Vmax = 5;
+Vmax_m = Vmax * l0; <span class="comment">%convert to m/s</span>
+speed_muscle = vel_norm/Vmax; <span class="comment">%convert to V/Vmax</span>
+
+
+len_r = muscle_len./l0;
+
+t_0 = 15.0; <span class="comment">%resting tension in newtons</span>
+
+pred_force = zeros(length(trial), 1);FV = zeros(length(trial), 1);
+FLA = zeros(length(trial), 1);FLP = zeros(length(trial), 1); Flen = zeros(length(trial), 1);
+normC = zeros(length(trial), 1); normFS = zeros(length(trial), 1); C = zeros(length(trial), 2);
+
+FS = sqrt(trial(:, FS_X).^2 + trial(:, FS_Y).^2);
+F = sqrt(trial(:, Cmd_X).^2 + trial(:, Cmd_Y).^2);
+
+reflex_gain = 2.5;
+reflex_component = zeros(length(trial),1);
+</pre><h2 id="16">Calculate orthogonal force at hand</h2><p><img src="demo_script_eq13711682400227527630.png" alt="$$ \tau = r \cdot F \cdot \sin(\theta)$$" style="width:77px;height:11px;"></p><p>Given the force at the hand, we calculate the component that is perpindicular to the forearm (L2 shank) which gives us $ F \sin(\theta)$</p><pre>The radius is the length of the forearm (L2)</pre><pre class="codeinput"><span class="keyword">for</span> i = 1:length(trial)
+    FV(i) = ppval(fv_int, speed_muscle(i));
+    FLA(i) = max(0, ppval(fa_int, len_r(i)));
+    FLP(i) = ppval(fp_int, len_r(i));
+    <span class="comment">%Flen(i) = FLA(i) + FLP(i);</span>
+    pred_force(i) = ((0.5 * FV(i) * FLA(i)) + FLP(i)) * t_0;
+
+    A = hand_force(i,:); <span class="comment">%hand forces</span>
+    A2 = hand_FS(i,:);
+    B = orth_v(i,:);
+    C(i,:) = (dot(A,B)/norm(B)^2)*B;
+    C2(i,:) = (dot(A2,B)/norm(B)^2) *B;
+    normC(i) = norm(C(i,:)); <span class="comment">%orthogonal force at hand, i.e. F*sin(theta)</span>
+
+    normFS(i) = norm(C2(i,:));
+
+<span class="keyword">end</span>
+
+<span class="comment">% Filter the signal</span>
+N3 = 4;
+lb = 5/(0.5*Fs); <span class="comment">% Lower cutoff frquency</span>
+[b2,a2] = butter(N3,lb,<span class="string">'low'</span>);
+
+torq_cmd = L2 .* normC;
+
+torq_FS = L2 .* normFS;
+
+torq_hill = d .* pred_force .* sind(thetatorqued);
+
+SRS = trial(:,SRS_gain); <span class="comment">%force from SRS</span>
+
+SRS_torque = d .* SRS .* sind(thetatorqued);
+
+residuals = torq_FS - torq_cmd;
+mdl = fitlm(torq_cmd, torq_FS);
+
+
+mdl_pred = fitlm(torq_hill * 6 + SRS_torque, torq_cmd);
+mse_pred = mdl_pred.MSE;
+mse_val = mdl.MSE;
+
+range = [3000, 17000];
+</pre><h2 id="18">PLOTS</h2><pre class="codeinput">figure(3);
+maxtiles = 5;
+t = tiledlayout(<span class="string">'flow'</span>);
+nexttile([1, maxtiles]) <span class="comment">%FIRST ONE</span>
+plot(trial(:, Frame), torq_hill*6,<span class="string">'LineWidth'</span>, 2.0,<span class="string">'color'</span>, <span class="string">'b'</span>)
+ax1 = gca();
+ax1.XAxis.FontSize = 16;
+ax1.YAxis.FontSize = 16;
+
+hFig = gcf;
+color = get(hFig, <span class="string">'Color'</span>);
+set(ax1,<span class="string">'XColor'</span>, <span class="string">'none'</span>, <span class="string">'TickDir'</span>, <span class="string">'out'</span>);
+ylabel(<span class="string">"Hill-Type"</span>, <span class="string">'FontSize'</span>, 24)
+<span class="comment">%legend(["Commanded Torque","Measured Torque"], 'fontsize', 24);</span>
+set(ax1, <span class="string">'TickDir'</span>, <span class="string">'out'</span>)
+
+xlim(range)
+yticks([])
+box <span class="string">off</span>
+
+nexttile([1, maxtiles])
+
+plot(trial(:,Frame), SRS_torque* 6, <span class="string">'LineWidth'</span>, 2, <span class="string">'color'</span>, <span class="string">'r'</span>)
+xlim(range)
+ax3 = gca();
+ax3.XAxis.FontSize = 16;
+ax3.YAxis.FontSize = 16;
+set(ax3, <span class="string">'TickDir'</span>, <span class="string">'out'</span>)
+ylabel(<span class="string">"SRS"</span>, <span class="string">'FontSize'</span>, 30)
+yticks([])
+xticks([])
+box <span class="string">off</span>
+
+<span class="comment">% plot(trial(:,Frame), SRS_torque, 'LineWidth', 2, 'color', [0.5 1 0.1])</span>
+
+nexttile([2, maxtiles])
+plot(trial(:,Frame), torq_cmd, <span class="string">'LineWidth'</span>, 2, <span class="string">'color'</span>, <span class="string">'k'</span>);
+<span class="comment">% hold on</span>
+<span class="comment">% plot(trial(:,Frame), torq_FS, 'LineWidth', 2, 'color', [0.2, 0.0, 0 0.8]);</span>
+ax = gca(3);
+ax.XAxis.FontSize = 16;
+ax.YAxis.FontSize = 16;
+ylabel(<span class="string">"Total Torque (Nm)"</span>, <span class="string">'FontSize'</span>, 24)
+xlabel(<span class="string">"Time (ms)"</span>,<span class="string">'FontSize'</span>, 24)
+xlim(range)
+hold <span class="string">on</span>
+plot(trial(:,Frame), SRS_torque*6, <span class="string">'color'</span>, <span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2)
+hold <span class="string">on</span>
+plot(trial(:,Frame), torq_hill*6, <span class="string">'color'</span>, <span class="string">'b'</span>, <span class="string">'LineWidth'</span>, 2)
+box <span class="string">off</span>
+
+
+l = legend([<span class="string">"Commanded Torque"</span>, <span class="string">"SRS Component"</span>, <span class="string">"Hill Component"</span>]);
+l.FontSize = 20;
+title(t, <span class="string">"Torque Components"</span>, <span class="string">'FontSize'</span>, 30, <span class="string">'FontWeight'</span>, <span class="string">'bold'</span>)
+</pre><img vspace="5" hspace="5" src="demo_script_04.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%%
+% *Sample Trial Processing*
+
+%% Column Numbers 
+% Set the column numbers of relevant variables so that the appropriate
+% vectors can be extracted from the data file
+
+Frame = 10; %We use the frame number to track time. 1000 frames are recorded per second
+%Force Sensors
+FS_X = 20; FS_Y = 21;
+
+%ACH = Analog Channel. These are added in the build file and are not
+%default kinarm outputs
+len_ACH = 49; % muscle length
+vel_ach = 50; %velocity
+activation = 51; %activation
+torque_analog = 52;
+SRS_gain = 53;
+
+%Coordinates of hand/spring end, velocity of the handle
+Hand_PositionX = 54; Hand_PositionY = 55; speed = 56; vel_x = 57; vel_y = 58;
+
+acc = 59; acc_X = 60; acc_Y = 61; Cmd_X = 62; Cmd_Y = 63; Cmd = 64;
+
+%% Data Loading
+% |Load the Hill Model Data, and Interpolate the curves to create continuous functions for smooth lookup|
+load("force_curves.mat");
+
+%%
+%  Force Velocity Curve
+f = fvCurve(:,2); 
+v = fvCurve(:,1);
+
+fv_int = spline(v, f);
+
+figure(1)
+scatter(v,f)
+xlabel("Velocity")
+ylabel("Force")
+hold on
+xx = -1:0.05:1;
+plot(xx, ppval(xx,fv_int));
+%%
+% |Force Length Active and Passive|
+fa = flaCurve(:,2);
+la = flaCurve(:,1);
+fa_int = spline(la, fa);
+
+fp = flpCurve(:,2);
+lp = flpCurve(:,1);
+fp_norm = fp ./max(fp); %normalize y values
+
+fp_int = spline(lp, fp);
+
+f_tot = ppval(fp_int, lp) + ppval(fa_int, lp);
+ft_int = spline(lp, f_tot);
+
+figure(2)
+scatter(la, fa)
+xlabel("Length")
+ylabel("Force")
+hold on
+scatter(lp, fp)
+
+xlim([0, 2.0])
+%%
+xx = 0:0.05:2.0;
+plot(xx, ppval(xx, fp_int))
+hold on
+plot(xx, ppval(xx, fa_int))
+hold off
+legend(["Active", "Passive"])
+%%
+
+%%
+% Load the trial we want to examine
+trial = readmatrix("Torque Trials/SRS_9.csv", 'Range', 273);
+
+%% Parameter definitions
+% These can be extracted from the file, but here I have just hard coded the
+% values 
+
+%%
+
+% *Define the relevant coordinates and lengths of the simulation* 
+% 
+% <<display_snap.png>>
+% 
+
+origin = [0,0.52]; % global y coordinate of the shoulder of the limb
+
+d = 0.08; %insertion point of muscle in forearm, measured as proportion of forearm total length
+
+L1 = 0.29; L2 = 0.2; %L1 = length of upper arm % L2 = length of forearm (rotating shank)
+
+elbow_pos= [0, (origin(2) - L1)]; %position of joint based on limb definitions
+
+L1_vec = origin - elbow_pos; %vector of upper arm
+
+muscle_act = trial(:,activation); %activation level of the muscle
+
+hand_pos = [trial(:,Hand_PositionX) trial(:,Hand_PositionY)]; %position of the hand in 2D space
+
+hand_force = [trial(:, Cmd_X) trial(:, Cmd_Y)]; %force commanded by KinArm at the hand
+
+hand_FS = [trial(:,FS_X), trial(:,FS_Y)]; % force measured by force sensors at the hand
+L2_vec = hand_pos - elbow_pos; %vector from joint to hand
+    
+insertion_offset = (d/L2) * L2_vec; % length of insertion point along forearm
+    
+insertion_vec = insertion_offset - elbow_pos; %vector from elbow to insertion point
+insertion_pos = elbow_pos + insertion_offset; %coordinate position of muscle insertion
+
+muscle_vec = origin - insertion_pos; % vector of muscle from origin to insertion point 
+
+muscle_len = zeros(length(insertion_vec), 1); %length of the muscle
+
+theta = zeros(length(insertion_vec), 1); % empty n*1 vector for later
+beta = zeros(length(insertion_vec), 1);
+
+thetatorqued = zeros(length(insertion_vec),1); 
+costheta = zeros(length(insertion_vec),1);
+thetatorque = zeros(length(insertion_vec), 1);
+
+joint_ang = zeros(length(insertion_vec), 1);
+orth_ang = zeros(length(insertion_vec), 1);
+
+x1 = 1; y1 = 0; %vector defining the x axis
+%%
+
+for i = 1:length(insertion_vec)
+    theta(i) = subspace(L2_vec(i,:)', insertion_vec(i,:)'); %angle b/w forearm and muscle
+    muscle_len(i) = sqrt(sum(muscle_vec(i,:).^2)); %instantaneous muscle length
+    beta(i) = subspace(L2_vec(i,:)', hand_force(i,:)'); %angle b/w force at the hand and the forearm
+    %this angle helps us do inverse kinematics to calculate the torque at the hand!
+
+    x2 = L2_vec(i,1);
+    y2 = L2_vec(i,2);
+    joint_ang(i) = atan2(x1*y2 - y1*x2, x1*x2 + y1*y2);
+    orth_ang(i) = joint_ang(i) - (pi/2);
+
+    %%
+    % Calculate the norm of the cross product between the muscle and the forearm
+    % vectors, and the dot product between the muscle and forearm and take
+    % the arctangent
+    %% 
+    
+    u = [muscle_vec(i,:), 0];
+    v1 = [L2_vec(i,:), 0];
+        
+    thetatorqued(i) = atan2d(norm(cross(u,v1)), dot(u,v1));
+    
+    costheta(i) = max(min(dot(u,v1)/norm(u)*norm(v1),1),-1); 
+    thetatorque(i) = real(acos(costheta(i)));
+
+end
+%%
+% Using the Forces at the hand and the angles between the joints and the
+% muscle, calculate the torque produced by the muscle
+
+orth_v = [cos(orth_ang) sin(orth_ang)];
+
+joint_angd = rad2deg(joint_ang);
+orth_angd = rad2deg(orth_ang);
+thetad = rad2deg(theta);
+betad = rad2deg(beta);
+
+velocity = [trial(:, vel_x), trial(:, vel_y)]; %x and y velocities
+
+hand_speed = trial(:,speed);
+
+Fs = 1000; % Frame rate is 1000 frames per second
+speed_raw = [0;diff(muscle_len)*Fs];
+N3 = 2; %Order
+lb = 10/(0.5*Fs); % Lower cutoff frquency
+[b2,a2] = butter(N3,lb,'low');
+
+speed_filt = filtfilt(b2, a2, speed_raw); %filter the speed data 
+
+vel_norm = speed_filt / l0; %resting lengths per second
+
+Vmax = 5;
+Vmax_m = Vmax * l0; %convert to m/s
+speed_muscle = vel_norm/Vmax; %convert to V/Vmax
+
+
+len_r = muscle_len./l0;
+
+t_0 = 15.0; %resting tension in newtons
+
+pred_force = zeros(length(trial), 1);FV = zeros(length(trial), 1);
+FLA = zeros(length(trial), 1);FLP = zeros(length(trial), 1); Flen = zeros(length(trial), 1);
+normC = zeros(length(trial), 1); normFS = zeros(length(trial), 1); C = zeros(length(trial), 2);
+
+FS = sqrt(trial(:, FS_X).^2 + trial(:, FS_Y).^2);
+F = sqrt(trial(:, Cmd_X).^2 + trial(:, Cmd_Y).^2);
+
+reflex_gain = 2.5;
+reflex_component = zeros(length(trial),1);
+
+
+
+%% Calculate orthogonal force at hand
+%%
+% $$ \tau = r \cdot F \cdot \sin(\theta)$$
+% 
+% Given the force at the hand, we calculate the component that is
+% perpindicular to the forearm (L2 shank) which gives us $ F \sin(\theta)$
+%
+%  The radius is the length of the forearm (L2)
+
+
+for i = 1:length(trial)
+    FV(i) = ppval(fv_int, speed_muscle(i));
+    FLA(i) = max(0, ppval(fa_int, len_r(i)));
+    FLP(i) = ppval(fp_int, len_r(i));
+    %Flen(i) = FLA(i) + FLP(i);
+    pred_force(i) = ((0.5 * FV(i) * FLA(i)) + FLP(i)) * t_0;
+
+    A = hand_force(i,:); %hand forces
+    A2 = hand_FS(i,:);
+    B = orth_v(i,:);
+    C(i,:) = (dot(A,B)/norm(B)^2)*B;
+    C2(i,:) = (dot(A2,B)/norm(B)^2) *B;
+    normC(i) = norm(C(i,:)); %orthogonal force at hand, i.e. F*sin(theta)
+
+    normFS(i) = norm(C2(i,:));
+    
+end
+
+% Filter the signal
+N3 = 4; 
+lb = 5/(0.5*Fs); % Lower cutoff frquency
+[b2,a2] = butter(N3,lb,'low');
+
+torq_cmd = L2 .* normC;
+
+torq_FS = L2 .* normFS;
+
+torq_hill = d .* pred_force .* sind(thetatorqued);
+
+SRS = trial(:,SRS_gain); %force from SRS
+
+SRS_torque = d .* SRS .* sind(thetatorqued); 
+
+residuals = torq_FS - torq_cmd; 
+mdl = fitlm(torq_cmd, torq_FS);
+
+
+mdl_pred = fitlm(torq_hill * 6 + SRS_torque, torq_cmd);
+mse_pred = mdl_pred.MSE;
+mse_val = mdl.MSE;
+
+range = [3000, 17000];
+
+%% PLOTS
+
+figure(3);
+maxtiles = 5;
+t = tiledlayout('flow');
+nexttile([1, maxtiles]) %FIRST ONE
+plot(trial(:, Frame), torq_hill*6,'LineWidth', 2.0,'color', 'b')
+ax1 = gca(); 
+ax1.XAxis.FontSize = 16;
+ax1.YAxis.FontSize = 16;
+
+hFig = gcf;
+color = get(hFig, 'Color');
+set(ax1,'XColor', 'none', 'TickDir', 'out');
+ylabel("Hill-Type", 'FontSize', 24)
+%legend(["Commanded Torque","Measured Torque"], 'fontsize', 24);
+set(ax1, 'TickDir', 'out')
+
+xlim(range)
+yticks([])
+box off
+
+nexttile([1, maxtiles])
+
+plot(trial(:,Frame), SRS_torque* 6, 'LineWidth', 2, 'color', 'r')
+xlim(range)
+ax3 = gca(); 
+ax3.XAxis.FontSize = 16;
+ax3.YAxis.FontSize = 16;
+set(ax3, 'TickDir', 'out')
+ylabel("SRS", 'FontSize', 30)
+yticks([])
+xticks([])
+box off
+
+% plot(trial(:,Frame), SRS_torque, 'LineWidth', 2, 'color', [0.5 1 0.1])
+
+nexttile([2, maxtiles])
+plot(trial(:,Frame), torq_cmd, 'LineWidth', 2, 'color', 'k');
+% hold on
+% plot(trial(:,Frame), torq_FS, 'LineWidth', 2, 'color', [0.2, 0.0, 0 0.8]);
+ax = gca(3); 
+ax.XAxis.FontSize = 16;
+ax.YAxis.FontSize = 16;
+ylabel("Total Torque (Nm)", 'FontSize', 24)
+xlabel("Time (ms)",'FontSize', 24)
+xlim(range)
+hold on 
+plot(trial(:,Frame), SRS_torque*6, 'color', 'r', 'LineWidth', 2)
+hold on 
+plot(trial(:,Frame), torq_hill*6, 'color', 'b', 'LineWidth', 2)
+box off
+
+
+l = legend(["Commanded Torque", "SRS Component", "Hill Component"]);
+l.FontSize = 20;
+title(t, "Torque Components", 'FontSize', 30, 'FontWeight', 'bold')
+%%
+
+
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>
