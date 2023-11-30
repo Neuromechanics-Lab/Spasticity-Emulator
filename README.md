@@ -1,5 +1,5 @@
 # Spasticity-Emulator
-Tutorials and code for Operating KinArm Spasticity Emulator **ADD FURTHER DESCRIPTION**
+Tutorials and code for Operating KinArm Spasticity Emulator **ADD FURTHER DESCRIPTION and hyperlinks **
 
 
  1. START HERE: **KinArm Tutorial.md**: Written instructions with visuals for using the KinArm in lab. Use this file to operate the KinArm and collect your data
