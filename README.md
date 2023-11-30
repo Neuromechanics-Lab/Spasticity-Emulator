@@ -1,9 +1,12 @@
 # Spasticity-Emulator
-Tutorials and code for Operating KinArm Spasticity Emulator
+Tutorials and code for Operating KinArm Spasticity Emulator **ADD FURTHER DESCRIPTION**
 
-- **KinArm Tutorial.md**: Written instructions with visuals for using the KinArm in lab
--  **demo** : Folder with sample matlab code and instructions demonstrating how to process and analyze trial data. To view the demo, download the entire folder and open the demo_script.html file on your browser. 
 
+ 1. START HERE: **KinArm Tutorial.md**: Written instructions with visuals for using the KinArm in lab. Use this file to operate the KinArm and collect your data
+ 2.  **demo** : Once you have collected data, use this document as a reference for processing your data.
+ Folder with sample matlab code and instructions demonstrating how to process and analyze trial data. To view the demo, download the entire folder and open the demo_script.html file on your browser. 
+
+## OTHER FILES
 - **force_curves.mat**: loads Hill Model as 3 separate variables, each of which is a [nx2] matrix with length or velocity and force. For use in post-processing
 
 - **{flp.dat, fla.dat, fv.dat, srs.dat}**: matrices from force_curves converted into 1-D little-endian binary vectors for use in Simulink model as a lookup table. Tutorial on how to convert a 2D matrix into a compatible vector can be found within torque_reflex.slx. These files are already uploaded to the build folder on the KinArm computer, you do not need them locally. 
