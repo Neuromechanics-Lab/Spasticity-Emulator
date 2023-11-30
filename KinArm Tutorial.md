@@ -17,12 +17,12 @@ From the desktop, select the Dexterit-E app.
 
 From the interface, select a user {1} (e.g., Nathan Baune, Rauf Iftikhar, Lena Ting etc.) and a subject {2}(e.g. John Doe, Random Participant etc.). Select the custom tasks tab {3}. 
 
-![Dexterit-E Interface](./Tutorial/dext.png)
+![Dexterit-E Interface](./Tutorial/dext.PNG)
 
 
 Designate the arm to be assessed and the subject posture, and then select the appropriate folder. For the spasticity emulator, this will be the “torque_reflex” folder {4}. Under the folder, trial protocols will appear, such as “eccentric”, “concentric” and “spastic”. To run the spasticity emulator, choose the “spasticity” trial protocol. Once selected, you can edit the parameters of the trial protocol by clicking the paper and pencil icon, which opens up a new window with the target table, load table etc. {5}.  
 
-![Edit Trial Protocol](./Tutorial/TP.png)
+![Edit Trial Protocol](./Tutorial/TP.PNG)
 
 To run a trial, press the play icon underneath “Run” and the KinArm will begin to execute the trial protocol. Move the handle to the left-hand plane of the display, and let the robot guide the handle to appropriate shank lengths. Once the shanks are at a stable length, you can rotate the handle in the left-hand half of the plane. 
 
