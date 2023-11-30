@@ -26,6 +26,9 @@ Designate the arm to be assessed and the subject posture, and then select the ap
 
 To run a trial, press the play icon underneath “Run” and the KinArm will begin to execute the trial protocol. Move the handle to the left-hand plane of the display, and let the robot guide the handle to appropriate shank lengths. Once the shanks are at a stable length, you can rotate the handle in the left-hand half of the plane. 
 
+**add video here**
+
+
 Once you are done with the trial, let go of the handle and return to the computer. Press the STOP button on the display. 
 
 The trial data can be viewed by opening Dexterit-E explorer (white letter K icon, underneath Dexterit-E) on the monitor. 
