@@ -1,7 +1,7 @@
 # Spasticity-Emulator
 Tutorials and code for Operating KinArm Spasticity Emulator
 
-- **KinArm Tutorial.md **: Written instructions with visuals for using the KinArm in lab
+- **KinArm Tutorial.md**: Written instructions with visuals for using the KinArm in lab
 -  **demo_script.html** : Sample matlab code and instructions demonstrating how to process and analyze trial data. 
 
 - **force_curves.mat**: loads Hill Model as 3 separate variables, each of which is a [nx2] matrix with length or velocity and force. For use in post-processing
