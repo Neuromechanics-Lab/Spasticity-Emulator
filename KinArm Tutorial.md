@@ -10,7 +10,6 @@ The KinArm is located in the ERH basement in room RG20. The room code is 5925. T
 
 Once the computers and robot are turned on, the monitor attached to the KinArm will turn on. 
 
-
 From the desktop, select the Dexterit-E app. 
 ![KinArm Monitor](./Tutorial/desktop.png)
 
@@ -20,11 +19,21 @@ From the interface, select a user {1} (e.g., Nathan Baune, Rauf Iftikhar, Lena T
 ![Dexterit-E Interface](./Tutorial/dext.PNG)
 
 
-Designate the arm to be assessed and the subject posture, and then select the appropriate folder. For the spasticity emulator, this will be the “torque_reflex” folder {4}. Under the folder, trial protocols will appear, such as “eccentric”, “concentric” and “spastic”. To run the spasticity emulator, choose the “spasticity” trial protocol. Once selected, you can edit the parameters of the trial protocol by clicking the paper and pencil icon, which opens up a new window with the target table, load table etc. {5}.  
+Designate the arm to be assessed and the subject posture, and then select the appropriate folder. The following folders are of interest:
+1. **spring_graphic**: loads a spring with fixed position haptic feedback VR target.
+2. **spring_damper** : loads a spring and damper system with sinusoidal oscillating haptic feedback VR target
+3. **hill_model**: loads a hill-model with the handle acting as the end of a muscle and sinusoidal oscillating haptic feedback VR target.
+4. **torque_model** loads a hill-model on a limb with handle acting as the end of a limb with a muscle creating a torque about a joint
+5. **torque_reflex** loads an augmented version of (4), with short-range stiffness, activation conditions, and added passive stiffness parameters available.
+
+For the spasticity emulator, this will be the “torque_reflex” folder {4}. Under the folder, trial protocols will appear, such as “eccentric”, “concentric” and “spastic”. To run the spasticity emulator, choose the “spasticity” trial protocol. Once selected, you can edit the parameters of the trial protocol by clicking the paper and pencil icon, which opens up a new window with the target table, load table etc. {5}.  
 
 ![Edit Trial Protocol](./Tutorial/TP.PNG)
 
-To run a trial, press the play icon underneath “Run” and the KinArm will begin to execute the trial protocol. Move the handle to the left-hand plane of the display, and let the robot guide the handle to appropriate shank lengths. Once the shanks are at a stable length, you can rotate the handle in the left-hand half of the plane. 
+Before you run a trial, calibrate the robots by pressing the "calibrate" button. Use the interface to reset the zero value of the force sensors in the handle.
+To run a trial, press the play icon underneath “Run” and the KinArm will begin to execute the trial protocol. 
+
+Move the handle to the left-hand side of the display, and let the robot guide the handle to appropriate shank lengths. Once the shanks are at a stable length, you can rotate the handle in the left-hand half of the plane. 
 
 **add video here and explanation of a trial**
 
