@@ -2,7 +2,7 @@
 Tutorials and code for Operating KinArm Spasticity Emulator **ADD FURTHER DESCRIPTION and hyperlinks **
 
 
- 1. START HERE: **KinArm Tutorial.md**: Written instructions with visuals for using the KinArm in lab. Use this file to operate the KinArm and collect your data
+ 1. START HERE: [KinArm Tutorial](https://github.com/Neuromechanics-Lab/Spasticity-Emulator/blob/main/KinArm%20Tutorial.md): Written instructions with visuals for using the KinArm in lab. Use this file to operate the KinArm and collect your data
  2.  **demo** : Once you have collected data, use this document as a reference for processing your data.
  Folder with sample matlab code and instructions demonstrating how to process and analyze trial data. To view the demo, download the entire folder and open the demo_script.html file on your browser. 
 
