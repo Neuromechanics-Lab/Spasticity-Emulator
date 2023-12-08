@@ -14,7 +14,7 @@ Thus, we have here built a code repository to simulate a spastic limb on the Kin
  2.  **Data Processing Tutorial** : Once you have collected data, use this document as a reference for processing your data.
  If you have access to the Neuromechanics Lab Repository, you can click this link and log into your github account ![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=Neuromechanics-Lab/Spasticity-Emulator&file=kinarm_tutorial.mlx)
 
-If you do not have access, you cannot use the Live Editor but can instead open this HTML file: [HTML in New Window](https://htmlpreview.github.io/?https://github.com/https://github.com/Neuromechanics-Lab/Spasticity-Emulator/kinarm_tutorial.html)
+If you do not have access, you cannot use the Live Editor but can instead open this HTML file: [HTML in New Window](https://htmlpreview.github.io/?https://github.com/Neuromechanics-Lab/Spasticity-Emulator/kinarm_tutorial.html)
 
  
 
