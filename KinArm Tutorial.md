@@ -35,7 +35,9 @@ To run a trial, press the play icon underneath “Run” and the KinArm will beg
 
 Move the handle to the left-hand side of the display, and let the robot guide the handle to appropriate shank lengths. Once the shanks are at a stable length, you can rotate the handle in the left-hand half of the plane. 
 
-**add video here and explanation of a trial**
+**add figure here and explanation of a trial**
+
+The torque_reflex trial is structured to involve a static hold followed by user defined sinusoids. A target will appear at the top of the display and after 2 seconds of holding the handle inside the target, it will begin to move in an arc about hte left hand side of the display. The trial will end after a set amount of time, defined by the "Trial Exit" parameter on the TP table in the Dexterit-E Task Protocol. 
 
 
 Once you are done with the trial, let go of the handle and return to the computer. Press the STOP button on the display. 
