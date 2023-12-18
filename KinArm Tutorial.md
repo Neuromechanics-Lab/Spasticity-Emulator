@@ -41,7 +41,7 @@ Move the handle to the left-hand side of the display, and let the robot guide th
 Once you are done with the trial, let go of the handle and return to the computer. Press the STOP button on the display. 
 
 The trial data can be viewed by opening Dexterit-E explorer (white letter K icon, underneath Dexterit-E) on the monitor. 
+![Dexterit-E Interface](./Tutorial/Dex_Explore.PNG)
+
 Trials are sorted by subject. When you click on a subject’s name, trials will appear. Find the desired trial based on the appropriate date and time. By right clicking on the desired trial, you can choose to export the file as a csv. Since the computer is not connected to the internet, you must plug in a USB thumb-drive into the KinArm computer (see above the leftmost circle in Fig. 1). Export the file to the thumb-drive and transfer it to your local computer to analyze the data in the manner of your choosing. 
 
-DATA PROCESSING
-The next step is to process your data. For your ease, there is a sample processing scirpt here: 
