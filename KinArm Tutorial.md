@@ -16,7 +16,7 @@ From the desktop, select the Dexterit-E app.
 
 From the interface, select a user {1} (e.g., Nathan Baune, Rauf Iftikhar, Lena Ting etc.) and a subject {2}(e.g. John Doe, Random Participant etc.). Select the custom tasks tab {3}. 
 
-![Dexterit-E Interface](./Tutorial/dext.PNG)
+![Dexterit-E Interface](./Tutorial/dext_censored.PNG)
 
 
 Designate the arm to be assessed and the subject posture, and then select the appropriate folder. The following folders are of interest:
