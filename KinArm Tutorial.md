@@ -37,6 +37,8 @@ Move the handle to the left-hand side of the display, and let the robot guide th
 
 ![githubmovie](https://github.com/Neuromechanics-Lab/Spasticity-Emulator/assets/65513023/295b39bb-a9f2-4f23-9860-9961f187548e)
 
+As you can see in the gif, the handle position may cause the L2 shank to be the wrong length initially, but it will guide the handle to the correct position once the handle is grasped. 
+
 The torque_reflex trial is structured to involve a static hold followed by user defined sinusoids. A target will appear at the top of the display and after 2 seconds of holding the handle inside the target, it will begin to move in an arc about hte left hand side of the display. The trial will end after a set amount of time, defined by the "Trial Exit" parameter on the TP table in the Dexterit-E Task Protocol. 
 
 
