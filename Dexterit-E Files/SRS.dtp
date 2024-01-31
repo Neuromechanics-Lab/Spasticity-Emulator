@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<task_protocol>
+	<analog_inputs>[['Muscle Force', '', 1.0, 0.0, '', False], 
+		['Analog Torque', '', 1.0, 0.0, '', False], 
+		['SRS', '', 1.0, 0.0, '', True], 
+		['Fx', '', 1.0, 0.0, '', False], 
+		['Fy', '', 1.0, 0.0, '', False], 
+		['hand_force', '', 1.0, 0.0, '', False]]</analog_inputs>
+	<analog_inputs_row_count>6</analog_inputs_row_count>
+	<binary_data>[[1, 'fla.dat'], [2, 'flp.dat'], [3, 'fv.dat'], [4, 'srs.dat']]</binary_data>
+	<binary_data_defs>[[1, 'Force Length'], [2, 'Force Length Passive'], [3, 'Force Velocity'], [4, 'Short Range Stiffness']]</binary_data_defs>
+	<blocktable>[['1', 1, '', False, 1]]</blocktable>
+	<blocktable_row_count>50</blocktable_row_count>
+	<code>''</code>
+	<data_rate>1000</data_rate>
+	<description>''</description>
+	<feedback_mode>3</feedback_mode>
+	<gaze_feedback_mode>0</gaze_feedback_mode>
+	<instructions>''</instructions>
+	<instructions_default>''</instructions_default>
+	<last_modified>'2024-01-31  03:12 PM'</last_modified>
+	<loadtable>[[0.291, 10.0, 5.0, 0.5, 0.0, 0.29, 0.2, 0.08, 400.0, 0.0, 50.0, 0.0, 10.0]]</loadtable>
+	<loadtable_defs>[['Muscle length', 'float'], ['T0', 'float'], ['Max Velocity', 'float'], ['Active Activation', 'float'], ['Reflex gain', 'float'], ['L1 shank length', 'float'], ['L2 shank length', 'float'], ['Insertion Offset', 'float'], ['Force Channel Strength', 'float'], ['Resting vs moving velocity threshold', 'float'], ['Force Channel Damping', 'float'], ['Spring in Parallel to Muscle', 'float'], ['SRS Gain', 'float']]</loadtable_defs>
+	<loadtable_row_count>27</loadtable_row_count>
+	<name>'SRS'</name>
+	<pause_behaviour>0</pause_behaviour>
+	<random_seed>1</random_seed>
+	<save_binary_data>False</save_binary_data>
+	<targetfor_ep>['Global Coordinate System', ['None'], False]</targetfor_ep>
+	<targetfor_exo>('Fingertip', ['Active', 30, 90], True)</targetfor_exo>
+	<targettable>[[0.0, 20.0, 'muscle.png', 4.0, '0', 0.0, 0.0], 
+		[0.0, 0.0, '255128192', 3.0, '0', 0.0, 0.0], 
+		[0.0, 0.0, '128128255', 3.0, '0', 0.0, 0.0], 
+		[0.0, 43.0, '255000000', 3.0, '000255128', 0.1, 20.0]]</targettable>
+	<targettable_defs>[['X', 'float'], ['Y', 'float'], ['Image', 'colour'], ['Thickness', 'float'], ['Second Color', 'colour'], ['Frequency', 'float'], ['Amplitude', 'float']]</targettable_defs>
+	<targettable_row_count>64</targettable_row_count>
+	<tasklevelparams>[['CONDITION', '3'], 
+		['SPRING_X', '0.00'], 
+		['SPRING_Y', '0.52']]</tasklevelparams>
+	<tasklevelparams_defs>[['SPRING_X', 'float'], ['SPRING_Y', 'float'], ['CONDITION', 'integer']]</tasklevelparams_defs>
+	<tasklevelparams_row_count>3</tasklevelparams_row_count>
+	<tptable>[[1, 1, 4, 1500.0, 12000.0, 10000.0, 2, 3, 0]]</tptable>
+	<tptable_defs>[['Muscle Image', 'target'], ['Load', 'load'], ['Target', 'target'], ['Delay', 'float'], ['Length of Trial', 'float'], ['Trial Exit', 'float'], ['L1 Shank', 'target'], ['L2 Shank', 'target'], ['Reflex Type', 'int']]</tptable_defs>
+	<tptable_row_count>100</tptable_row_count>
+	<use_repeat_trial_flag>0</use_repeat_trial_flag>
+	<version>3.9</version>
+	<video>''</video>
+</task_protocol>
