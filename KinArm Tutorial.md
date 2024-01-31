@@ -4,7 +4,7 @@ Rauf Iftikhar
 
 Simulink code and MATLAB processing scripts can be found on the lab github under the repository “Spasticity Emulator.” 
 
-The KinArm is located in the ERH basement in room RG20. The room code is 5925. The machine can be turned on by pressing the 3 power buttons indicated below in any order. 
+The KinArm is located in the ERH basement in room RG20. The machine can be turned on by pressing the 3 power buttons indicated below in any order. 
 
 ![KinArm Power Buttons](./Tutorial/kinarm_computers.jpg)
 
