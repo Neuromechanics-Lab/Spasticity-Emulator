@@ -19,14 +19,15 @@ From the interface, select a user {1} (e.g., Nathan Baune, Rauf Iftikhar, Lena T
 ![Dexterit-E Interface](./Tutorial/dext_censored.PNG)
 
 
-Designate the arm to be assessed and the subject posture, and then select the appropriate folder. The following folders are of interest:
-1. **spring_graphic**: loads a spring with fixed position haptic feedback VR target.
-2. **spring_damper** : loads a spring and damper system with sinusoidal oscillating haptic feedback VR target
-3. **hill_model**: loads a hill-model with the handle acting as the end of a muscle and sinusoidal oscillating haptic feedback VR target.
-4. **torque_model** loads a hill-model on a limb with handle acting as the end of a limb with a muscle creating a torque about a joint
-5. **torque_reflex** loads an augmented version of (4), with short-range stiffness, activation conditions, and added passive stiffness parameters available.
+Designate the arm to be assessed and the subject posture, and then select the appropriate folder. The desired folder is **spasticity_model**. This folder contains several different task protocols that can be used to quickly load desired parameters. These are the task protocols currently available: 
+1. **Concentric**: Loads a model where muscle activation is 0.75 when muscle is shortening and 0 when the muscle is still or lengthening.
+2. **Constant**: Loads a model where muscle activation is always 0.75. All other parameters are inactive.
+3. **Eccentric**: Loads a model where muscle activation is 0.75 when muscle is lengthening and 0 when muscle is still or shortening. All other parameters are inactive.
+4. **SRS** Loads a model with eccentric muscle activation control and added short-range stiffness (k=10). Velocity-based reflex and added spring stiffness are inactive. 
+5. **Spasticity**: Loads a model with all parameters active. These include short-range stiffness (k = 10), added passive stiffness spring (k = 8), and velocity-dependent reflex (k=15). 
+loads an augmented version of (4), with short-range stiffness, activation conditions, and added passive stiffness parameters available.
 
-For the spasticity emulator, this will be the “torque_reflex” folder {4}. Under the folder, trial protocols will appear, such as “eccentric”, “concentric” and “spastic”. To run the spasticity emulator, choose the “spasticity” trial protocol. Once selected, you can edit the parameters of the trial protocol by clicking the paper and pencil icon, which opens up a new window with the target table, load table etc. {5}.  
+To edit a trial protocol, select the protocol and click the paper and pencil icon.
 
 ![Edit Trial Protocol](./Tutorial/TP.PNG)
 
