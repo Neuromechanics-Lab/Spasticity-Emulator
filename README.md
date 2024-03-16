@@ -21,8 +21,7 @@ If you do not have access, you cannot use the Live Editor but can instead open t
 ## OTHER FILES
 - **force_curves.mat**: loads Hill Model as 3 separate variables, each of which is a [nx2] matrix with length or velocity and force. For use in post-processing
 
-- **{flp.dat, fla.dat, fv.dat, srs.dat}**: matrices from force_curves converted into 1-D little-endian binary vectors for use in Simulink model as a lookup table. Tutorial on how to convert a 2D matrix into a compatible vector can be found within torque_reflex.slx. These files are already uploaded to the build folder on the KinArm computer, you do not need them locally. 
-
+- **{flp.dat, fla.dat, fv.dat, srs.dat}**: matlab data matrices loaded from force_curves.mat or manually generated. Converted into 1-D little-endian binary vectors for use in Simulink model as a lookup table. Code to convert the .mat file into .dat can be found in srs.m. Add to a task protocol in Dexterit-E by editing a task protocol and adding the paths to appropriate files under the "File Inputs" tab. 
 - **torque_reflex.slx**: Simulink model of limb and muscle mechanics. Can be edited to add, remove or modify model parameters. 
 	- requires Dexterit-E task development library installed on MATLAB to edit. This can be done in the lab on the monitor in the KinArm room, or on the laptop. To run the file on the KinArm, use ctrl+B to BUILD the file into a .mldatx. This build can be put into the Dexterit-E custom tasks folder on the KinArm computer and run from Dexterit-E.
 	- Do NOT change the .mldatx file name or you will get an error and not be able to use the build.
